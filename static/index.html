@@ -1,52 +1,260 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" id="tab-favicon" href="favicon.png" />
-  <title id="t">Home</title>
+  <title id="t">Proxy</title>
   <link rel="stylesheet" href="/assets/css/global.css?v=6" />
-  <link rel="stylesheet" href="/assets/css/h.css?v=01" />
   <link rel="stylesheet" href="/assets/css/nav.css?v=01" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840529569014734"
-    crossorigin="anonymous"></script>
-</head>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-<body class="center" onload="SplashT">
-  <div class="f-nav"></div>
-  <div id="particles-js">
-    <script rel="preload" src="https://cdn.jsdelivr.net/particles.js/2.0.0/"></script>
-    <div class="main">
-      <h1 class="title">&#73;&#110;&#116;&#101;&#114;&#115;&#116;&#101;&#108;&#108;&#97;&#114;</h1>
-      <p id="splash"></p>
-      <div class="search-container">
-        <form id="fv" method="POST">
-          <input id="input" class="truncate" placeholder="Search or enter a URL" type="text" />
-        </form>
-      </div>
+    html, body {
+      height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── STAR CANVAS ── */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── NAV — keep Interstellar's nav working ── */
+    .f-nav { position: relative; z-index: 100; }
+
+    /* ── MAIN CONTENT ── */
+    #particles-js {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    /* ── TITLE ── */
+    .title {
+      font-size: clamp(52px, 10vw, 96px);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow:
+        0 0 40px rgba(255,255,255,0.15),
+        0 0 80px rgba(255,255,255,0.05);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SUBTITLE ── */
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: -4px;
+      margin-bottom: 10px;
+      animation: fadeDown 0.9s ease 0.1s both;
+    }
+
+    #splash {
+      font-size: 12px;
+      color: #333;
+      letter-spacing: 0.1em;
+      min-height: 16px;
+    }
+
+    /* ── SEARCH ── */
+    .search-container {
+      width: min(600px, 88vw);
+      margin-top: 14px;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #fv {
+      display: flex;
+      background: #0e0e0e;
+      border: 1px solid #222;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #fv:focus-within {
+      border-color: #444;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.04);
+    }
+
+    #input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 15px;
+      padding: 16px 20px;
+      font-family: inherit;
+    }
+    #input::placeholder { color: #333; }
+
+    .search-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 16px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .search-btn:hover { background: #ddd; }
+  </style>
+</head>
+<body>
+
+<!-- Falling stars canvas -->
+<canvas id="starfield"></canvas>
+
+<div class="f-nav"></div>
+
+<div id="particles-js">
+  <div class="main">
+    <h1 class="title">Proxy</h1>
+    <p class="subtitle">Made by Eric</p>
+    <p id="splash"></p>
+    <div class="search-container">
+      <form id="fv" method="POST">
+        <input id="input" class="truncate" placeholder="Search or enter a URL" type="text" autocomplete="off" />
+        <button class="search-btn" type="submit"><i class="fa fa-magnifying-glass"></i></button>
+      </form>
     </div>
   </div>
-  <script src="assets/js/index-3.js"></script>
-  <script src="/assets/js/h1.js"></script>
-  <script src="./assets/mathematics/bundle.js?v=2025-04-15"></script>
-  <script src="./assets/mathematics/config.js?v=2025-04-15"></script>
-  <script src="/assets/js/m1.js"></script>
-  <!-- DO NOT REMOVE-->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || []
-    function gtag() {
-      dataLayer.push(arguments)
+</div>
+
+<!-- Keep all original Interstellar scripts so search still works -->
+<script src="assets/js/index-3.js"></script>
+<script src="/assets/js/h1.js"></script>
+<script src="./assets/mathematics/bundle.js?v=2025-04-15"></script>
+<script src="./assets/mathematics/config.js?v=2025-04-15"></script>
+<script src="/assets/js/m1.js"></script>
+
+<!-- Falling stars -->
+<script>
+(function () {
+  var canvas = document.getElementById('starfield');
+  var ctx    = canvas.getContext('2d');
+  var stars  = [];
+  var NUM    = 180;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function randomStar() {
+    return {
+      x:     Math.random() * canvas.width,
+      y:     Math.random() * canvas.height - canvas.height,
+      len:   Math.random() * 18 + 6,
+      speed: Math.random() * 4 + 2,
+      width: Math.random() * 1.2 + 0.2,
+      alpha: Math.random() * 0.6 + 0.2
+    };
+  }
+
+  function init() {
+    resize();
+    stars = [];
+    for (var i = 0; i < NUM; i++) {
+      var s = randomStar();
+      s.y = Math.random() * canvas.height; // spread on load
+      stars.push(s);
     }
-    gtag("js", new Date())
+  }
 
-    gtag("config", "G-WKJQ5QHQTJ")
-  </script>
-  <!-- DO NOT REMOVE-->
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+
+      // trail
+      var grad = ctx.createLinearGradient(s.x, s.y, s.x, s.y + s.len);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,255,255,' + s.alpha + ')');
+
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x, s.y + s.len);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth   = s.width;
+      ctx.stroke();
+
+      // dot at tip
+      ctx.beginPath();
+      ctx.arc(s.x, s.y + s.len, s.width * 0.8, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + s.alpha + ')';
+      ctx.fill();
+
+      // move down
+      s.y += s.speed;
+
+      // reset when off screen
+      if (s.y > canvas.height) {
+        var ns = randomStar();
+        ns.y = -s.len;
+        stars[i] = ns;
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function () { resize(); });
+  init();
+  draw();
+})();
+</script>
+
+<!-- DO NOT REMOVE-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() { dataLayer.push(arguments) }
+  gtag("js", new Date())
+  gtag("config", "G-WKJQ5QHQTJ")
+</script>
+<!-- DO NOT REMOVE-->
+
 </body>
-
 </html>
