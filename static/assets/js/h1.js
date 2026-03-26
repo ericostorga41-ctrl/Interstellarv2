@@ -85,16 +85,15 @@ document.addEventListener("DOMContentLoaded", event => {
   }
 });
 
-// Splash texts — customized
+// Splash texts
 const SplashT = [
   "Made by Eric",
-  "Welcome to Proxy",
-  "Stay private, stay free",
-  "Click to cycle messages",
-  "Works on any network",
-  "Check out the settings page",
-  "Fast. Private. Yours.",
-  "Built different 🔥",
+  "HAHAHA",
+  "GATEKEEP TS",
+  "VERSION 1 BTW",
+  "IANS",
+  "JOHNSABUM.",
+  "different 🔥",
 ];
 
 let SplashI = Math.floor(Math.random() * SplashT.length);
