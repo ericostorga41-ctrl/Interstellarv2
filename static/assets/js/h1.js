@@ -88,12 +88,12 @@ document.addEventListener("DOMContentLoaded", event => {
 // Splash texts
 const SplashT = [
   "Made by Eric",
-  "HAHAHA",
-  "GATEKEEP TS",
-  "VERSION 1 BTW",
-  "IANS",
-  "JOHNSABUM.",
-  "different 🔥",
+  "HAHAHAHA",
+  "wassup",
+  "idk",
+  "B",
+  "z.",
+  "🔥",
 ];
 
 let SplashI = Math.floor(Math.random() * SplashT.length);
